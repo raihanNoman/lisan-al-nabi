@@ -1,52 +1,53 @@
 import { Image } from "expo-image";
-import { SymbolView } from "expo-symbols";
 import React from "react";
-import { Platform, Pressable, ScrollView, StyleSheet } from "react-native";
+import { Platform, ScrollView, StyleSheet } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ExternalLink } from "@/components/external-link";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Collapsible } from "@/components/ui/collapsible";
 import { WebBadge } from "@/components/web-badge";
-import { MaxContentWidth, Spacing } from "@/constants/theme";
+import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import { useScrollViewStyles } from "@/styles/scroll-view";
 
-export default function ExploreScreen() {
+export default function WordsScreen() {
   const theme = useTheme();
-  const scrollViewStyles = useScrollViewStyles({
-    containerStyles: styles.contentContainer,
-    styles: styles.scrollView,
+  const safeAreaInsets = useSafeAreaInsets();
+  const insets = {
+    ...safeAreaInsets,
+    bottom: safeAreaInsets.bottom + BottomTabInset + Spacing.three,
+  };
+
+  const contentPlatformStyle = Platform.select({
+    android: {
+      paddingTop: insets.top,
+      paddingLeft: insets.left,
+      paddingRight: insets.right,
+      paddingBottom: insets.bottom,
+    },
+    web: {
+      paddingTop: Spacing.six,
+      paddingBottom: Spacing.four,
+    },
   });
 
   return (
-    <ScrollView {...scrollViewStyles}>
+    <ScrollView
+      style={[styles.scrollView, { backgroundColor: theme.background }]}
+      contentInset={insets}
+      contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}
+    >
       <ThemedView style={styles.container}>
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="subtitle">Explore</ThemedText>
+          <ThemedText type="subtitle">Words</ThemedText>
           <ThemedText style={styles.centerText} themeColor="textSecondary">
-            This starter app includes example{"\n"}code to help you get started.
+            Learn the vocabulary of{"\n"}Rasul (ﷺ)
           </ThemedText>
-
-          <ExternalLink href="https://docs.expo.dev" asChild>
-            <Pressable style={({ pressed }) => pressed && styles.pressed}>
-              <ThemedView type="backgroundElement" style={styles.linkButton}>
-                <ThemedText type="link">Expo documentation</ThemedText>
-                <SymbolView
-                  tintColor={theme.text}
-                  name={{
-                    ios: "arrow.up.right.square",
-                    android: "link",
-                    web: "link",
-                  }}
-                  size={12}
-                />
-              </ThemedView>
-            </Pressable>
-          </ExternalLink>
         </ThemedView>
 
         <ThemedView style={styles.sectionsWrapper}>
+          // masinary list.
           <Collapsible title="File-based routing">
             <ThemedText type="small">
               This app has two screens:{" "}
@@ -62,7 +63,6 @@ export default function ExploreScreen() {
               <ThemedText type="linkPrimary">Learn more</ThemedText>
             </ExternalLink>
           </Collapsible>
-
           <Collapsible title="Android, iOS, and web support">
             <ThemedView
               type="backgroundElement"
@@ -80,7 +80,6 @@ export default function ExploreScreen() {
               />
             </ThemedView>
           </Collapsible>
-
           <Collapsible title="Images">
             <ThemedText type="small">
               For static images, you can use the{" "}
@@ -96,7 +95,6 @@ export default function ExploreScreen() {
               <ThemedText type="linkPrimary">Learn more</ThemedText>
             </ExternalLink>
           </Collapsible>
-
           <Collapsible title="Light and dark mode components">
             <ThemedText type="small">
               This template has light and dark mode support. The{" "}
@@ -108,7 +106,6 @@ export default function ExploreScreen() {
               <ThemedText type="linkPrimary">Learn more</ThemedText>
             </ExternalLink>
           </Collapsible>
-
           <Collapsible title="Animations">
             <ThemedText type="small">
               This template includes an example of an animated component. The{" "}
@@ -131,7 +128,6 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-
   contentContainer: {
     flexDirection: "row",
     justifyContent: "center",
