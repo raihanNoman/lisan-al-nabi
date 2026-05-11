@@ -1,24 +1,27 @@
 import React from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
 
+import { QUOTES } from "@/assets/data";
 import SnapScrollView from "@/components/ui/tiktok-scroll";
 import { MaxContentWidth, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { useAppDispatch } from "../../redux/hooks";
+import { setCurrentQuote } from "../../redux/slice/quote";
+
+const quotes = QUOTES.map((quote, i) => i.toString());
 
 export default function ExploreScreen() {
   const theme = useTheme();
   const { height } = useWindowDimensions();
+  const dispatch = useAppDispatch();
 
   function onScroll(index: number) {
+    dispatch(setCurrentQuote({ index, quote: QUOTES[index] }));
     console.log("scroll index", index);
   }
-
   return (
-    <SnapScrollView
-      postIDs={["red", "green", "dark-green"]}
-      postHeight={height}
-      onScroll={onScroll}
-    />
+    /** @see QuoteItem file:///Users/noman/Desktop/lisan/src/components/ui/QuoteItem.tsx     */
+    <SnapScrollView postIDs={quotes} postHeight={height} onScroll={onScroll} />
   );
 }
 
