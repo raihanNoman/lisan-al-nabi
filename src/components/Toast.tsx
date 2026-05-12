@@ -1,4 +1,5 @@
 import { useTheme } from "@/hooks/use-theme";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import React from "react";
 import { BaseToast, ErrorToast, ToastConfig } from "react-native-toast-message";
 
@@ -9,7 +10,7 @@ export const toastConfig: ToastConfig = {
   success: (props) => {
     const card = useTheme().background;
     const text = useTheme().text;
-    const secondary = useThemeColor({}, "tabIconDefault");
+    const secondary = useThemeColor({}, "textSecondary");
     const green = useThemeColor({}, "correct");
 
     return (
@@ -26,7 +27,7 @@ export const toastConfig: ToastConfig = {
   error: (props) => {
     const card = useThemeColor({}, "card");
     const text = useThemeColor({}, "text");
-    const secondary = useThemeColor({}, "tabIconDefault");
+    const secondary = useThemeColor({}, "textSecondary");
     const red = useThemeColor({}, "wrong") || "#ff4444";
 
     return (

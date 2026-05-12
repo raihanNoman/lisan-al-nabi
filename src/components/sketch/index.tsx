@@ -1,13 +1,14 @@
 // import Button from "@/components/Button";
-import { Card, useThemeColor } from "@/components/Themed";
 import { SAFE_SCREEN_WIDTH } from "@/constants/Platform";
-import print from "@/utils/print";
 import React, { useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Sketch from "./Sketch";
 import { SketchRef } from "./type";
 import { useViewBox } from "./useSketch";
+import { useThemeColor } from "@/hooks/use-theme-color";
+import { View } from "../Themed";
+import print from "../../../utils/print";
 
 export default function SketchDemo() {
   const sketchRef = useRef<SketchRef>(null);
@@ -32,7 +33,7 @@ export default function SketchDemo() {
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Card
+      <View
         onLayout={setViewBox}
         style={{
           alignSelf: "center",
@@ -56,7 +57,7 @@ export default function SketchDemo() {
             bgColor="transparent"
           />
         </View>
-      </Card>
+      </View>
 
       {/* <Button title="Reset" onPressIn={Haptic.heavy} onPress={clearCanvas} />
       <Button

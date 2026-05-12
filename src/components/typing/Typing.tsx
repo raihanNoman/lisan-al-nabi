@@ -48,7 +48,7 @@ export default function Typing({
       setStartTyping(true);
     }, delayMS);
 
-    setTypingInterval(startTimeout);
+    setTypingInterval(startTimeout as any);
 
     return () => {
       clearTimeout(startTimeout);

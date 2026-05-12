@@ -1,4 +1,3 @@
-import { useThemeColor } from "@/components/Themed";
 import React, { useEffect, useMemo, useState } from "react";
 import Animated, {
   cancelAnimation,
@@ -13,6 +12,7 @@ import { scheduleOnRN } from "react-native-worklets";
 import { svgPathProperties } from "svg-path-properties";
 import { DEFAULT_CANVAS } from "./data";
 import { StrokeItem, toSVGpaths } from "./toSVGpaths";
+import { useThemeColor } from "@/hooks/use-theme-color";
 
 interface props extends SvgProps {
   strokeItems: StrokeItem[];
