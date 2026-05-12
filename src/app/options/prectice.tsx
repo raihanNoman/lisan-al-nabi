@@ -1,5 +1,5 @@
-import { Text } from "@/components/themed";
-import { useRouter } from "expo-router";
+import { Text } from "@/components/Themed";
+import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,7 +16,7 @@ const REPORT_OPTIONS: Option[] = [
   { id: "7", label: "Copyright or Ownership Issue" },
 ];
 
-export default function PracticeOptionsModal() {
+export default function Modal_PracticeOptions() {
   const router = useRouter();
   const [selected, setSelected] = useState<Option>();
   const [loading, setLoading] = useState(false);
@@ -41,6 +41,8 @@ export default function PracticeOptionsModal() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Stack.Header style={{ backgroundColor: "transparent" }} />
+
       <Text type="title" style={styles.title}>
         Practice Quote
       </Text>

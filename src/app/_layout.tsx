@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 import PlayerProvider from "@/components/player/ctx";
 import Toast from "react-native-toast-message";
+import { Stack } from "expo-router";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -33,7 +34,15 @@ export default function TabLayout() {
             value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
           >
             <AnimatedSplashOverlay />
-            <AppTabs />
+
+            <Stack>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="options/practice"
+                options={{ headerShown: false, presentation: "modal" }}
+              />
+            </Stack>
 
             <Toast config={{}} />
           </ThemeProvider>

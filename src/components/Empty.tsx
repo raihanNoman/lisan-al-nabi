@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from "react";
 import { ActivityIndicator, Dimensions, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextBox } from "../../types/styles";
-import { Text } from "./themed";
+import { Text } from "./Themed";
 
 interface EmptyProps extends TextBox, PropsWithChildren {
   label?: string;

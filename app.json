@@ -1,16 +1,30 @@
 {
   "expo": {
-    "name": "lisan",
-    "slug": "lisan",
+    "name": "Lisan",
+    "slug": "lisan-al-nabi",
+    "description": "لسن النبي",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "lisan",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.nomanapps21.lisanAlNabi",
+      "usesAppleSignIn": true,
+      "supportsTablet": true,
+      "appleTeamId": "759G3V6R99",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Used to record Hadith recitation for pronunciation feedback and practice.",
+        "NSSpeechRecognitionUsageDescription": "Used to convert arabic speech into text for recitation practice and tests.",
+        "UIBackgroundModes": ["audio"],
+        "NSAppleMusicUsageDescription": "Used to store and play hadith recitation during practice session.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.nomanapps21.lisanAlNabi",
+
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -35,8 +49,23 @@
           }
         }
       ],
-      "expo-audio",
-      "expo-asset"
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Used to record Hadith recitation for pronunciation feedback and practice."
+        }
+      ],
+      "expo-asset",
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to use the microphone.",
+          "speechRecognitionPermission": "Allow $(PRODUCT_NAME) to use speech recognition.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

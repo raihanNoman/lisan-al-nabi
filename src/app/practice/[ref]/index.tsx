@@ -1,11 +1,10 @@
-import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-export default function GradeScreen() {
+export default function index() {
   return (
     <View>
-      <Text>Time</Text>
-      <Text>Accuracy</Text>
+      <Text>index</Text>
     </View>
   );
 }

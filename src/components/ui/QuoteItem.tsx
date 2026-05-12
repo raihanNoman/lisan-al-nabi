@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { useAppSelector } from "../../../redux/hooks";
 import Empty from "../Empty";
-import { Text, View } from "../themed";
+import { Text, View } from "../Themed";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { HadithGradeColor, Quote } from "@/assets/data";
 import { ExternalLink } from "../external-link";

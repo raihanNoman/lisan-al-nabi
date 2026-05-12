@@ -1,37 +1,31 @@
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+  Feather,
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppSelector } from "../../../redux/hooks";
 import { useTheme } from "@/hooks/use-theme";
-import { Icon } from "../themed";
+import { Icon, Text, View } from "../Themed";
+import { useStateLooper } from "@/hooks/use-state-looper";
+import { LANGUAGE_INFO, Languages } from "../../../utils/languages";
 
 // Project Imports
 
 export default function Actions() {
-  const { completedIDs, inReviewIDs, current } = useAppSelector((s) => s.quote);
-  const { isCompleted, isInReview } = useMemo(
-    () => ({
-      isCompleted:
-        current.quote?.ref && completedIDs?.includes(current.quote?.ref),
-      isInReview:
-        current.quote?.ref && inReviewIDs?.includes(current.quote?.ref),
-    }),
-    [completedIDs, inReviewIDs, current.quote?.ref],
-  );
+  const theme = useTheme();
   const router = useRouter();
 
-  const actions = {
-    practice: {
-      speaking: () => router.push({ pathname: "/" }),
-      writing: () =>
-        router.push({ pathname: "/", params: { type: "writing" } }),
-    },
-    mark: {
-      needReview: () => router.push({ pathname: "/" }),
-      completed: () => router.push({ pathname: "/" }),
-    },
+  const navPractice = () =>
+    router.push({ pathname: "/practice/(session)/ordering" });
+  const openModal = {
+    practiceOptions: () => router.push({ pathname: "/options/prectice" }),
+    languageOptions: () => router.push({ pathname: "/options/translation" }),
+    moreOptions: () => router.push({ pathname: "/options/utility" }),
   };
   const activeHeart = "#FF3B30";
   const activeBookmark = "#FFCC00";
@@ -40,22 +34,52 @@ export default function Actions() {
   const iconColor = useTheme().text;
   const bgSubtle = useTheme().backgroundSelected;
 
+  const volume = useStateLooper([true, false]);
+  const language = useStateLooper<Language | undefined>([
+    undefined,
+    ...Languages,
+  ]);
+
+  function LanguageLooper() {
+    if (language.currentOption) {
+      const flag = LANGUAGE_INFO[language.currentOption].flag;
+      return <Text style={{ fontSize: size }}>{flag}</Text>;
+    } else {
+      return <Ionicons name="language" size={size} color={theme.text} />;
+    }
+  }
+
   return (
     <SafeAreaView id="per-bite-controls" style={[styles.pos, styles.box]}>
-      <ActionButton onPress={actions.practice.speaking} bg={bgSubtle}>
-        <MaterialIcons name="record-voice-over" />
+      <ActionButton onPress={volume.trigger.next} bg={bgSubtle}>
+        <MaterialCommunityIcons
+          name={volume.currentOption ? "volume-mute" : "volume-high"}
+        />
+      </ActionButton>
+      <View style={{ flex: 1, minHeight: 100 }} />
+
+      <ActionButton
+        onPress={navPractice}
+        onLongPress={openModal.practiceOptions}
+        bg={bgSubtle}
+      >
+        <MaterialCommunityIcons name="sword-cross" />
       </ActionButton>
 
-      <ActionButton onPress={actions.practice.writing} bg={bgSubtle}>
-        <MaterialCommunityIcons name="draw" />
+      <ActionButton
+        onPress={language.trigger.next}
+        onLongPress={openModal.languageOptions}
+        bg={bgSubtle}
+      >
+        <LanguageLooper />
       </ActionButton>
 
-      <ActionButton onPress={actions.mark.needReview} bg={bgSubtle}>
-        <MaterialCommunityIcons name="bookmark" />
-      </ActionButton>
-
-      <ActionButton onPress={actions.mark.completed} bg={bgSubtle}>
-        <MaterialCommunityIcons name="check-bold" />
+      <ActionButton
+        onPress={openModal.moreOptions}
+        onLongPress={openModal.moreOptions}
+        bg={bgSubtle}
+      >
+        <MaterialCommunityIcons name="dots-vertical" />
       </ActionButton>
     </SafeAreaView>
   );
@@ -64,6 +88,7 @@ export default function Actions() {
 interface ActionButtonProps {
   children: React.ReactNode;
   onPress: () => void;
+  onLongPress?: () => void;
   active?: boolean;
   activeColor?: string;
   bg: string;
@@ -72,6 +97,7 @@ interface ActionButtonProps {
 function ActionButton({
   children,
   onPress,
+  onLongPress,
   active,
   activeColor,
   bg,
@@ -80,7 +106,7 @@ function ActionButton({
   // or just pass it directly to the prop.
 
   return (
-    <Pressable onPress={onPress} style={styles.btn}>
+    <Pressable onPress={onPress} onLongPress={onLongPress} style={styles.btn}>
       <Icon size={size}>{children}</Icon>
     </Pressable>
   );

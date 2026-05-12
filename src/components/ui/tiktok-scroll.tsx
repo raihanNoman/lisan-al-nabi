@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import { ExternalLink } from "@/components/external-link";
-import { View } from "@/components/themed";
+import { View } from "@/components/Themed";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { WebBadge } from "@/components/web-badge";
