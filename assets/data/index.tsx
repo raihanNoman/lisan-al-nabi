@@ -17,8 +17,8 @@ export const HadithGradeColor: Record<HadithGrade, ColorValue> = {
 };
 
 export interface Quote {
-  ar: string;
-  en: string;
+  ar: string[];
+  en: string[];
   ref: string | number;
   book: HadithBook | HadithBook[];
   grade: HadithGrade;
@@ -31,8 +31,24 @@ export interface Quote {
 
 export const QUOTES: Quote[] = [
   {
-    ar: " إنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إلَى مَا هَاجَرَ إلَيْهِ",
-    en: "Actions are (judged) by motives (niyyah), so each man will have what he intended. Thus, he whose migration (hijrah) was to Allah and His Messenger, his migration is to Allah and His Messenger; but he whose migration was for some worldly thing he might gain, or for a wife he might marry, his migration is to that for which he migrated",
+    ar: [
+      "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ",
+      "وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+      "فَمَنْ كَانَتْ هِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ",
+      "فَهِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ",
+      "وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا",
+      "أَوْ امْرَأَةٍ يَنْكِحُهَا",
+      "فَهِجْرَتُهُ إلَى مَا هَاجَرَ إلَيْهِ",
+    ],
+    en: [
+      "Actions are judged by intentions.",
+      "Every person will have what they intended.",
+      "Whoever migrated to Allah and His Messenger,",
+      "then his migration was to Allah and His Messenger.",
+      "And whoever migrated for worldly gain,",
+      "or for a woman he wished to marry,",
+      "then his migration was for that which he migrated toward.",
+    ],
     ref: "40-1",
     book: ["Muslim", "Bukhari"],
     grade: "Sahi",
@@ -41,8 +57,24 @@ export const QUOTES: Quote[] = [
   },
 
   {
-    ar: " بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَحَجِّ الْبَيْتِ، وَصَوْمِ رَمَضَانَ",
-    en: "Islam has been built on five [pillars]: testifying that there is no deity worthy of worship except Allah and that Muhammad is the Messenger of Allah, establishing the salah (prayer), paying the zakat (obligatory charity), making the hajj (pilgrimage) to the House, and fasting in Ramadhan",
+    ar: [
+      "بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ",
+      "شَهَادَةِ أَنْ لَا إلَهَ إلَّا اللَّهُ",
+      "وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
+      "وَإِقَامِ الصَّلَاةِ",
+      "وَإِيتَاءِ الزَّكَاةِ",
+      "وَحَجِّ الْبَيْتِ",
+      "وَصَوْمِ رَمَضَانَ",
+    ],
+    en: [
+      "Islam is built upon five.",
+      "Testifying that none has the right to be worshipped except Allah,",
+      "and that Muhammad is the Messenger of Allah.",
+      "Establishing the prayer.",
+      "Giving the zakah.",
+      "Performing pilgrimage to the House.",
+      "And fasting Ramadan.",
+    ],
     ref: "40-3",
     book: ["Bukhari", "Muslim"],
     grade: "Sahi",
@@ -51,8 +83,18 @@ export const QUOTES: Quote[] = [
   },
 
   {
-    ar: "حُبِّبَ إِلَىَّ مِنَ الدُّنْيَا النِّسَاءُ وَالطِّيبُ وَجُعِلَ قُرَّةُ عَيْنِي فِي الصَّلاَةِ",
-    en: "In this world, women and perfume have been made dear to me, and my comfort has been provided in prayer.",
+    ar: [
+      "حُبِّبَ إِلَىَّ مِنَ الدُّنْيَا",
+      "النِّسَاءُ وَالطِّيبُ",
+      "وَجُعِلَ قُرَّةُ عَيْنِي",
+      "فِي الصَّلاَةِ",
+    ],
+    en: [
+      "From this world,",
+      "women and perfume were made beloved to me.",
+      "And the coolness of my eyes",
+      "was placed in prayer.",
+    ],
     ref: "n-3939",
     audio: require("@/assets/audio/n-3939.mp3"),
     book: "Al Nasai",
@@ -62,8 +104,28 @@ export const QUOTES: Quote[] = [
   },
 
   {
-    ar: "   يَا عَبْدَ اللَّهِ أَلَمْ أُخْبَرْ أَنَّكَ تَصُومُ النَّهَارَ وَتَقُومُ اللَّيْلَ فَلاَ تَفْعَلْ، صُمْ وَأَفْطِرْ، وَقُمْ وَنَمْ، فَإِنَّ لِجَسَدِكَ عَلَيْكَ حَقًّا، وَإِنَّ لِعَيْنِكَ عَلَيْكَ حَقًّا، وَإِنَّ لِزَوْجِكَ عَلَيْكَ حَقًّا  ",
-    en: " O `Abdullah! Have I not been formed that you fast all the day and stand in prayer all night? Do not do that! Observe the fast sometimes and also leave them (the fast) at other times; stand up for the prayer at night and also sleep at night. Your body has a right over you, your eyes have a right over you and your wife has a right over you.",
+    ar: [
+      "يَا عَبْدَ اللَّهِ",
+      "أَلَمْ أُخْبَرْ أَنَّكَ تَصُومُ النَّهَارَ",
+      "وَتَقُومُ اللَّيْلَ",
+      "فَلَا تَفْعَلْ",
+      "صُمْ وَأَفْطِرْ",
+      "وَقُمْ وَنَمْ",
+      "فَإِنَّ لِجَسَدِكَ عَلَيْكَ حَقًّا",
+      "وَإِنَّ لِعَيْنِكَ عَلَيْكَ حَقًّا",
+      "وَإِنَّ لِزَوْجِكَ عَلَيْكَ حَقًّا",
+    ],
+    en: [
+      "O Abdullah,",
+      "have I not been informed that you fast all day,",
+      "and stand in prayer all night?",
+      "Do not do that.",
+      "Fast sometimes and break your fast sometimes.",
+      "Pray at night and also sleep.",
+      "Your body has a right over you.",
+      "Your eyes have a right over you.",
+      "And your wife has a right over you.",
+    ],
     book: "Bukhari",
     ref: "b-5199",
     audio: require("@/assets/audio/b-5199.m4a"),
@@ -73,8 +135,20 @@ export const QUOTES: Quote[] = [
   },
 
   {
-    ar: "اللَّهُمَّ هَذَا فِعْلِي فِيمَا أَمْلِكُ فَلاَ تَلُمْنِي فِيمَا تَمْلِكُ وَلاَ أَمْلِكُ",
-    en: "O Allah, this is what I have done with regard to that over which I have control, so do not blame me for that over which You have control and I do not.",
+    ar: [
+      "اللَّهُمَّ هَذَا فِعْلِي",
+      "فِيمَا أَمْلِكُ",
+      "فَلَا تَلُمْنِي",
+      "فِيمَا تَمْلِكُ",
+      "وَلَا أَمْلِكُ",
+    ],
+    en: [
+      "O Allah, this is my effort",
+      "regarding what I control.",
+      "So do not blame me",
+      "for what You control",
+      "and I do not.",
+    ],
     ref: "n-3943",
     audio: require("@/assets/audio/n-3943.mp3"),
     book: "Al Nasai",

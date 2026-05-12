@@ -13,6 +13,7 @@ import AppTabs from "@/components/app-tabs";
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 import PlayerProvider from "@/components/player/ctx";
+import Toast from "react-native-toast-message";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -33,6 +34,8 @@ export default function TabLayout() {
           >
             <AnimatedSplashOverlay />
             <AppTabs />
+
+            <Toast config={{}} />
           </ThemeProvider>
         </Provider>
       </PlayerProvider>

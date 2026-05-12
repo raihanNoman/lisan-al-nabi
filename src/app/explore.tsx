@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
 
 import { QUOTES } from "@/assets/data";
@@ -14,6 +14,11 @@ export default function ExploreScreen() {
   const theme = useTheme();
   const { height } = useWindowDimensions();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // init
+    dispatch(setCurrentQuote({ index: 0, quote: QUOTES[0] }));
+  }, []);
 
   function onScroll(index: number) {
     dispatch(setCurrentQuote({ index, quote: QUOTES[index] }));

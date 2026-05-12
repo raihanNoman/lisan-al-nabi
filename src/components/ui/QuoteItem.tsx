@@ -5,11 +5,13 @@ import { Pressable, StyleSheet } from "react-native";
 import { useAppSelector } from "../../../redux/hooks";
 import Empty from "../Empty";
 import { Text, View } from "../themed";
-import Typing from "../Typing";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { HadithGradeColor, Quote } from "@/assets/data";
 import { ExternalLink } from "../external-link";
 import { usePlayerCtx } from "../player/ctx";
+import AuxActions from "./AuxActions";
+import Actions from "./Actions";
+import TypingChunks from "../typing/TypingLine";
 
 export default function QuoteItem({
   height,
@@ -47,12 +49,12 @@ export default function QuoteItem({
   else if (index !== current.index)
     return <View style={[styles.item, { height }]} />;
   return (
-    <View style={[styles.item, { height }]}>
-      <Animated.View entering={FadeIn}>
-        <Typing
+    <View style={[styles.container, { height }]}>
+      <Animated.View entering={FadeIn} style={[styles.item, { height }]}>
+        <TypingChunks
           arabic
           triggerStart={triggerStart}
-          text={current.quote.ar}
+          chunks={current.quote.ar}
           size={50}
           script="Kitab"
         />
@@ -68,18 +70,28 @@ export default function QuoteItem({
             {current.quote.book} • {current.quote.ref}
           </Text>
         </ExternalLink>
+
+        <Actions />
+        <AuxActions />
       </Animated.View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  item: {
+  container: {
     height: SCREEN.height,
     maxWidth: MaxContentWidth,
-    alignSelf: "center",
     margin: "auto",
+    width: "100%",
+    alignSelf: "center",
+  },
+
+  item: {
+    height: SCREEN.height,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 80,
   },
 });

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "./themed";
-import Arabic, { ArabicTextProps } from "./themed-arabic";
-
-interface TypingTriggers {
-  onFinish?(): void;
-  triggerStart?: boolean;
-  forceEnd?: boolean;
-}
+import { Text } from "../themed";
+import Arabic, { ArabicTextProps } from "../themed-arabic";
+import { TypingTriggers } from "./types";
 
 interface props extends ArabicTextProps, TypingTriggers {
   arabic?: boolean;
