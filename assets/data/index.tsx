@@ -1,65 +1,85 @@
-type HadithBook = "Bukhari" | "Muslim" | "Abu Dawud" | "At Tirmidi" | "Al Nasai" | "Ibn Majah";
+import { AudioSource } from "expo-audio";
+import { ColorValue } from "react-native";
+
+type HadithBook =
+  | "Bukhari"
+  | "Muslim"
+  | "Abu Dawud"
+  | "At Tirmidi"
+  | "Al Nasai"
+  | "Ibn Majah";
 type HadithGrade = "Sahi" | "Hasan" | "Daif";
 
-export interface Quote {
-    ar: string;
-    en: string;
-    ref: string | number;
-    book: HadithBook | HadithBook[];
-    grade?: HadithGrade;
+export const HadithGradeColor: Record<HadithGrade, ColorValue> = {
+  Sahi: "hsl(105, 70%, 50%)",
+  Hasan: "hsl(50, 70%, 50%)",
+  Daif: "hsl(0, 70%, 50%)",
+};
 
-    link: string;
-    tags?: string[];
+export interface Quote {
+  ar: string;
+  en: string;
+  ref: string | number;
+  book: HadithBook | HadithBook[];
+  grade: HadithGrade;
+
+  link: string;
+  tags?: string[];
+
+  audio?: AudioSource;
 }
 
 export const QUOTES: Quote[] = [
-    {
-        ar: " إنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إلَى مَا هَاجَرَ إلَيْهِ",
-        en: "Actions are (judged) by motives (niyyah), so each man will have what he intended. Thus, he whose migration (hijrah) was to Allah and His Messenger, his migration is to Allah and His Messenger; but he whose migration was for some worldly thing he might gain, or for a wife he might marry, his migration is to that for which he migrated",
-        ref: "40-1",
-        book: ["Muslim", "Bukhari"],
-        grade: "Sahi",
-        link: "https://sunnah.com/nawawi40",
-        tags: ["40 Hadith"],
-    },
+  {
+    ar: " إنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إلَى مَا هَاجَرَ إلَيْهِ",
+    en: "Actions are (judged) by motives (niyyah), so each man will have what he intended. Thus, he whose migration (hijrah) was to Allah and His Messenger, his migration is to Allah and His Messenger; but he whose migration was for some worldly thing he might gain, or for a wife he might marry, his migration is to that for which he migrated",
+    ref: "40-1",
+    book: ["Muslim", "Bukhari"],
+    grade: "Sahi",
+    link: "https://sunnah.com/nawawi40",
+    tags: ["40 Hadith"],
+  },
 
-    {
-        ar: " بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَحَجِّ الْبَيْتِ، وَصَوْمِ رَمَضَانَ",
-        en: "Islam has been built on five [pillars]: testifying that there is no deity worthy of worship except Allah and that Muhammad is the Messenger of Allah, establishing the salah (prayer), paying the zakat (obligatory charity), making the hajj (pilgrimage) to the House, and fasting in Ramadhan",
-        ref: "40-3",
-        book: ["Bukhari", "Muslim"],
-        grade: "Sahi",
-        link: "https://sunnah.com/nawawi40",
-        tags: ["40 Hadith"],
-    },
+  {
+    ar: " بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَحَجِّ الْبَيْتِ، وَصَوْمِ رَمَضَانَ",
+    en: "Islam has been built on five [pillars]: testifying that there is no deity worthy of worship except Allah and that Muhammad is the Messenger of Allah, establishing the salah (prayer), paying the zakat (obligatory charity), making the hajj (pilgrimage) to the House, and fasting in Ramadhan",
+    ref: "40-3",
+    book: ["Bukhari", "Muslim"],
+    grade: "Sahi",
+    link: "https://sunnah.com/nawawi40",
+    tags: ["40 Hadith"],
+  },
 
-    {
-        ar: "حُبِّبَ إِلَىَّ مِنَ الدُّنْيَا النِّسَاءُ وَالطِّيبُ وَجُعِلَ قُرَّةُ عَيْنِي فِي الصَّلاَةِ",
-        en: "In this world, women and perfume have been made dear to me, and my comfort has been provided in prayer.",
-        ref: "3939",
-        book: "Al Nasai",
-        grade: "Hasan",
-        link: "https://sunnah.com/nasai/36",
-        tags: ["women"],
-    },
+  {
+    ar: "حُبِّبَ إِلَىَّ مِنَ الدُّنْيَا النِّسَاءُ وَالطِّيبُ وَجُعِلَ قُرَّةُ عَيْنِي فِي الصَّلاَةِ",
+    en: "In this world, women and perfume have been made dear to me, and my comfort has been provided in prayer.",
+    ref: "n-3939",
+    audio: require("@/assets/audio/n-3939.mp3"),
+    book: "Al Nasai",
+    grade: "Hasan",
+    link: "https://sunnah.com/nasai/36",
+    tags: ["women"],
+  },
 
-    {
-        ar: "   يَا عَبْدَ اللَّهِ أَلَمْ أُخْبَرْ أَنَّكَ تَصُومُ النَّهَارَ وَتَقُومُ اللَّيْلَ فَلاَ تَفْعَلْ، صُمْ وَأَفْطِرْ، وَقُمْ وَنَمْ، فَإِنَّ لِجَسَدِكَ عَلَيْكَ حَقًّا، وَإِنَّ لِعَيْنِكَ عَلَيْكَ حَقًّا، وَإِنَّ لِزَوْجِكَ عَلَيْكَ حَقًّا  ",
-        en: " O `Abdullah! Have I not been formed that you fast all the day and stand in prayer all night? Do not do that! Observe the fast sometimes and also leave them (the fast) at other times; stand up for the prayer at night and also sleep at night. Your body has a right over you, your eyes have a right over you and your wife has a right over you.",
-        book: "Bukhari",
-        ref: 5199,
-        grade: "Sahi",
-        link: "https://sunnah.com/bukhari:5199",
-        tags: ["women"],
-    },
+  {
+    ar: "   يَا عَبْدَ اللَّهِ أَلَمْ أُخْبَرْ أَنَّكَ تَصُومُ النَّهَارَ وَتَقُومُ اللَّيْلَ فَلاَ تَفْعَلْ، صُمْ وَأَفْطِرْ، وَقُمْ وَنَمْ، فَإِنَّ لِجَسَدِكَ عَلَيْكَ حَقًّا، وَإِنَّ لِعَيْنِكَ عَلَيْكَ حَقًّا، وَإِنَّ لِزَوْجِكَ عَلَيْكَ حَقًّا  ",
+    en: " O `Abdullah! Have I not been formed that you fast all the day and stand in prayer all night? Do not do that! Observe the fast sometimes and also leave them (the fast) at other times; stand up for the prayer at night and also sleep at night. Your body has a right over you, your eyes have a right over you and your wife has a right over you.",
+    book: "Bukhari",
+    ref: "b-5199",
+    audio: require("@/assets/audio/b-5199.m4a"),
+    grade: "Sahi",
+    link: "https://sunnah.com/bukhari:5199",
+    tags: ["women"],
+  },
 
-    {
-        ar: "اللَّهُمَّ هَذَا فِعْلِي فِيمَا أَمْلِكُ فَلاَ تَلُمْنِي فِيمَا تَمْلِكُ وَلاَ أَمْلِكُ",
-        en: "O Allah, this is what I have done with regard to that over which I have control, so do not blame me for that over which You have control and I do not.",
-        ref: "3943",
-        book: "Al Nasai",
-        grade: "Sahi",
-        link: "https://sunnah.com/nasai/36",
-        tags: ["women", "dua"],
-    },
+  {
+    ar: "اللَّهُمَّ هَذَا فِعْلِي فِيمَا أَمْلِكُ فَلاَ تَلُمْنِي فِيمَا تَمْلِكُ وَلاَ أَمْلِكُ",
+    en: "O Allah, this is what I have done with regard to that over which I have control, so do not blame me for that over which You have control and I do not.",
+    ref: "n-3943",
+    audio: require("@/assets/audio/n-3943.mp3"),
+    book: "Al Nasai",
+    grade: "Sahi",
+    link: "https://sunnah.com/nasai/36",
+    tags: ["women", "dua"],
+  },
 ];

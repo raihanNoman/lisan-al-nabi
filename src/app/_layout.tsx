@@ -12,6 +12,7 @@ import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import AppTabs from "@/components/app-tabs";
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
+import PlayerProvider from "@/components/player/ctx";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -25,14 +26,16 @@ export default function TabLayout() {
 
   return (
     <GestureHandlerRootView>
-      <Provider store={store}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <AnimatedSplashOverlay />
-          <AppTabs />
-        </ThemeProvider>
-      </Provider>
+      <PlayerProvider>
+        <Provider store={store}>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <AnimatedSplashOverlay />
+            <AppTabs />
+          </ThemeProvider>
+        </Provider>
+      </PlayerProvider>
     </GestureHandlerRootView>
   );
 }
